@@ -17,13 +17,15 @@ public class OracleConecgtions {
  * @param pass
  * @return
  */
-	public Connection getConn (String url, String user, String pass) {
+	public Connection getConn (String user, String pass) {
 		Connection conn = null;
 		try {
 			OracleDataSource ds = new OracleDataSource();
-			ds.setURL(url);
+			ds.setURL("jdbc:oracle:thin:@localhost:1521/xe");
 			conn = ds.getConnection(user, pass);
+			System.out.println("you are connected");
 		} catch (SQLException e) {
+			System.out.println("this did not work");
 			e.printStackTrace();
 		}
 		return conn;
@@ -42,7 +44,7 @@ public class OracleConecgtions {
 		Connection conn = null;
 		Statement stat = null;
 		try {
-			conn = getConn (url, user, pass);
+			conn = getConn (user, pass);
 			stat = conn.createStatement( ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
 			rs = stat.executeQuery("SELECT * FROM " + e.getClass().getName().toLowerCase().substring(e.getClass().getName().lastIndexOf('.') + 1) + " e");
 		} catch (SQLException se) {

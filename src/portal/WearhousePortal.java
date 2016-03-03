@@ -1,5 +1,12 @@
 package portal;
 
-public class WearhousePortal {
+public class WearhousePortal extends PortalSupper{
+
+	@Override
+	public void menu() {
+		System.out.println("What would you like to do?");
+		System.out.println("");
+		
+	}
 
 }

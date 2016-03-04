@@ -39,20 +39,23 @@ public class OracleConecgtions {
  * @param pass
  * @return
  */
-	public <E> ResultSet selectEntity(E e, String url, String user, String pass) {
+	public <E> ResultSet selectEntity(E e, String user, String pass) {
 		ResultSet rs = null;
 		Connection conn = null;
 		Statement stat = null;
 		try {
 			conn = getConn (user, pass);
-			stat = conn.createStatement( ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
-			rs = stat.executeQuery("SELECT * FROM " + e.getClass().getName().toLowerCase().substring(e.getClass().getName().lastIndexOf('.') + 1) + " e");
+			stat = conn.createStatement( ResultSet.TYPE_SCROLL_SENSITIVE, 
+					ResultSet.CONCUR_READ_ONLY);
+			rs = stat.executeQuery("SELECT * FROM " + 
+					e.getClass().getName().toLowerCase().substring(e.getClass().getName().lastIndexOf('.') + 1) + " e");
 		} catch (SQLException se) {
 			se.printStackTrace();
 		} finally {
 			closeConn (stat, conn);
 		} return rs;
 	}
+	
 	
 	public void closeConn(Statement stat, Connection conn) {
 		if (stat != null)

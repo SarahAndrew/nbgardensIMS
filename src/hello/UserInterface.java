@@ -3,36 +3,40 @@ package hello;
 import java.util.Scanner;
 
 public class UserInterface {
-	
+	private static String username;
+	private static String password;
 
-
+/**
+ * 
+ * @param args
+ */
 	public static void main(String[] args) {
-		UserInterface ui = new UserInterface();
 		OracleConecgtions oc = new OracleConecgtions();
-		int x = 8;
-		ui.login(x);
-		
-		
+		Scanner sc = new Scanner(System.in);
+		UserInterface ui = new UserInterface();
+		System.out.println("Please enter your username");
+		username = sc.next();
+		System.out.println("Please enter your password");
+		password = sc.next();
+		oc.getConn(username,password);
+//		ui.login(username, password);
+//		if login true
+//			menu();
+		sc.close();	
 	}
 
-	private boolean login(int x) {
-		Scanner sc = new Scanner(System.in);
-		System.out.println("please enter an interger");
-		while(x>7){
-			x = sc.nextInt();
-			if(x<=7){
-				System.out.println("You are logged in");
-				return true;
-				}
-			else
-				System.out.println("Try again");
-			return false;
-		}
-		System.out.println("Hello Wrold");
-		
-		sc.close();
-		return false;
-	}
+//	private boolean login(String user, String pass) {
+//		while(false){
+//		if(	oc.getConn(user,pass) return conn){
+//			return true;
+//		}
+//		else
+//			return false;
+//		System.out.println("Hello Wrold");
+//		}
+//
+//		return false;
+//	}
 	
 	
 

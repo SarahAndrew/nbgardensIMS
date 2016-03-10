@@ -20,5 +20,10 @@ public class ProductManagement {
 		return locations;
 	}
 	
+	public void readProduct(int id) {
+		String query = "SELECT * FROM products WHERE product_ID = " + id;
+		
+	}
+	
 	
 }

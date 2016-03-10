@@ -1,6 +1,9 @@
 package hello;
 
 import java.sql.Statement;
+
+import javax.sql.rowset.CachedRowSet;
+
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -8,7 +11,7 @@ import java.sql.SQLException;
 import oracle.jdbc.pool.OracleDataSource;
 
 public class OracleConecgtions {
-	
+	OracleConections oc = new OracleConections;
 	
 /**
  * this method connects to the Oracle database
@@ -31,29 +34,10 @@ public class OracleConecgtions {
 		return conn;
 	}
 	
-/**
- * I am not sure what this does at the moment
- * @param e
- * @param url
- * @param user
- * @param pass
- * @return
- */
-	public <E> ResultSet selectEntity(E e, String user, String pass) {
-		ResultSet rs = null;
-		Connection conn = null;
-		Statement stat = null;
-		try {
-			conn = getConn (user, pass);
-			stat = conn.createStatement( ResultSet.TYPE_SCROLL_SENSITIVE, 
-					ResultSet.CONCUR_READ_ONLY);
-			rs = stat.executeQuery("SELECT * FROM " + 
-					e.getClass().getName().toLowerCase().substring(e.getClass().getName().lastIndexOf('.') + 1) + " e");
-		} catch (SQLException se) {
-			se.printStackTrace();
-		} finally {
-			closeConn (stat, conn);
-		} return rs;
+	
+	public CachedRowSet query(String query) {
+		
+		getConn = getConn("SYSTEM","cymryd");
 	}
 	
 	

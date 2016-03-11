@@ -50,8 +50,9 @@ public class ProductManagement {
 		CachedRowSet crs = oc.query(query);
 		try {
 			while (crs.next()) {
-				String prodName = crs.getString("name");
-				System.out.println(prodName);
+				System.out.println(crs.getString("name"));
+				System.out.println(crs.getString("qnt"));
+				System.out.println(crs.getString("location"));
 			} 
 		} catch (SQLException e) {
 			e.printStackTrace();

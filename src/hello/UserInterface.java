@@ -35,26 +35,32 @@ public class UserInterface {
 		
 		department =ui.login(username,password);
 		
-		if(department=="Sales"){
-			SalesPortal s = new SalesPortal();
-			s.menu();
-		}
-		if(department=="Warehouse"){
-			WearhousePortal w = new WearhousePortal();
-			w.menu();
-		}
-		if(department=="Accounts"){
-			AccountManagementPortal a = new AccountManagementPortal();
-			a.menu();
-		}
-		if(department=="Inventory Management"){
-			IMPortal im = new IMPortal();
-			im.menu();
-		}
-		else{
-			System.out.println("you have a strange department");
+		String running = "yes";
+		while(running =="yes"){
+			if(department=="Sales"){
+				SalesPortal s = new SalesPortal();
+				s.menu();
+			}
+			if(department=="Warehouse"){
+				WearhousePortal w = new WearhousePortal();
+				w.menu();
+			}
+			if(department=="Accounts"){
+				AccountManagementPortal a = new AccountManagementPortal();
+				a.menu();
+			}
+			if(department=="Inventory Management"){
+				IMPortal im = new IMPortal();
+				im.menu();
+			}
+			else{
+				System.out.println("you have a strange department");
+			}
+			System.out.println("Would you like to do something else? yes or no");
+			running = sc.nextLine();
 		}
 		
+		System.out.println("Thank you for using the system");
 		sc.close();
 	}
 	

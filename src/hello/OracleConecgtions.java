@@ -8,10 +8,11 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import com.sun.rowset.*;
+
 import oracle.jdbc.pool.OracleDataSource;
 
 public class OracleConecgtions {
-	OracleConections oc = new OracleConections;
 	
 /**
  * this method connects to the Oracle database
@@ -20,6 +21,12 @@ public class OracleConecgtions {
  * @param pass
  * @return
  */
+	
+	Connection conn = null;
+	Statement stmt = null;
+	ResultSet rs = null;
+	CachedRowSet crs = null;
+	
 	public Connection getConn (String user, String pass) {
 		Connection conn = null;
 		try {
@@ -33,21 +40,44 @@ public class OracleConecgtions {
 		}
 		return conn;
 	}
-	
-	
-	public CachedRowSet query(String query) {
-		
-		getConn = getConn("SYSTEM","cymryd");
+	private String department(String user){
+		String deptQ = "SELECT department FROM employee WHERE username = "+user;
+		String dept = null;
+		try {
+			stmt = conn.createStatement();
+			dept = stmt.executeQuery(deptQ).toString();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}		
+		return dept;
 	}
 	
+	public CachedRowSet query(String query) {
+		conn = getConn("SYSTEM","cymryd");
+		try {
+			crs = new CachedRowSetImpl();
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(query);
+			crs.populate(rs);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		closeConn( conn);
+		conn = null;
+		return crs;
+	}
 	
-	public void closeConn(Statement stat, Connection conn) {
-		if (stat != null)
-			try {
-				stat.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
+	public void update(String query) {
+		conn = getConn("SYSTEM", "cymryd");
+		try {
+			stmt = conn.createStatement();
+			stmt.executeUpdate(query);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void closeConn(Connection conn) {
 		if (conn != null) {
 			try {
 				conn.close();

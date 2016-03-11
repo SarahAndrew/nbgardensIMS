@@ -27,30 +27,35 @@ public class OracleConecgtions {
 	ResultSet rs = null;
 	CachedRowSet crs = null;
 	
+	/**
+	 * This function connectes to the database 
+	 * @param user
+	 * @param pass
+	 * @return
+	 */
 	public Connection getConn (String user, String pass) {
 		Connection conn = null;
 		try {
 			OracleDataSource ds = new OracleDataSource();
 			ds.setURL("jdbc:oracle:thin:@localhost:1521/xe");
 			conn = ds.getConnection(user, pass);
-			System.out.println("you are connected");
 		} catch (SQLException e) {
-			System.out.println("this did not work");
 			e.printStackTrace();
 		}
 		return conn;
 	}
-	private String department(String user){
-		String deptQ = "SELECT department FROM employee WHERE username = "+user;
-		String dept = null;
-		try {
-			stmt = conn.createStatement();
-			dept = stmt.executeQuery(deptQ).toString();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}		
-		return dept;
-	}
+	
+//	private String department(String user){
+//		String deptQ = "SELECT department FROM employee WHERE username = "+user;
+//		String dept = null;
+//		try {
+//			stmt = conn.createStatement();
+//			dept = stmt.executeQuery(deptQ).toString();
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		}		
+//		return dept;
+//	}
 	
 	public CachedRowSet query(String query) {
 		conn = getConn("SYSTEM","cymryd");

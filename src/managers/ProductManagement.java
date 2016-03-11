@@ -19,11 +19,23 @@ public class ProductManagement {
 	private static String password = "cymryd";
 	OracleConecgtions oc = new OracleConecgtions();
 	
-	public int checkStockLevelName (String name){
+	/**
+	 * The next two methods are to check the stock level of a product,
+	 * They have the same name but take different vales in so method overloading can be used
+	 * The first one returns a 
+	 * @param name
+	 * @return
+	 */
+	public int checkStockLevel (String name){
 		
 		return stockLevel;
 	}
-	public int checkStockLevelID (String name){
+	/**
+	 * this method tells you the stock level of a product given it's id
+	 * @param id
+	 * @return
+	 */
+	public int checkStockLevel(int id){
 		
 		return stockLevel;
 	}
